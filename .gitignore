@@ -1,0 +1,16 @@
+# Python & virtualenvs
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Generated user outputs (keep assets/ tracked for README)
+outputs/
+
+# OS & editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
