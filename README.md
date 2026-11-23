@@ -2,7 +2,7 @@
 
 # `image-to-ascii-gif`
 
-**Convierte imágenes, GIFs y videos en arte ASCII animado con luz sutil, preservando el sujeto y los detalles.**
+**Turn images, GIFs, and videos into subtly animated ASCII art — preserving the subject, framing, and fine detail.**
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+">
@@ -13,51 +13,51 @@
 
 <br>
 
-<img src="assets/demo.gif" alt="Demostración: transición de foto original a arte ASCII animado" width="480" />
+<img src="assets/demo.gif" alt="Demo: original photo transitioning into animated ASCII art" width="480" />
 
 <p align="center">
-  <sub>Generado directamente con <code>ascii-gif foto.jpg --showcase</code></sub>
+  <sub>Generated directly with <code>ascii-gif photo.jpg --showcase</code></sub>
 </p>
 
 </div>
 
 ---
 
-## Características
+## Features
 
-- **Fiel al sujeto y al encuadre:** corrige automáticamente la proporción usando las métricas reales de la fuente monoespaciada y aplica un realce sutil de bordes para conservar rostros, siluetas y texturas.
-- **Animaciones sutiles en bucle perfecto:** da vida a imágenes estáticas mediante barridos de luz, destellos en zonas brillantes (`luminous`, `shimmer`, `sweep`, `breathe`, `scanline`, `drift`) sin deformar la imagen.
-- **Soporte multimedia completo:** acepta `PNG`, `JPG`, `WEBP`, `BMP`, `TIFF`, `GIF` animados y videos (`MP4`, `MOV`, `WEBM`, `MKV`, `AVI`).
-- **Exportación lista para compartir:** genera automáticamente `PNG`, `GIF`, `MP4` (H.264) y `TXT` en `outputs/` sin modificar jamás el archivo original.
-- **Modo Showcase integrado:** crea animaciones de transición *Original → barrido luminoso → ASCII animado* con `--showcase`, ideales para READMEs y redes sociales.
-- **Renderizado rápido con atlas de glifos:** vectorizado con NumPy + Pillow y resplandor sutil configurable (`--glow`).
+- **Faithful to the subject:** automatically compensates for character aspect ratio using real monospace font metrics and applies subtle edge micro-contrast so faces, silhouettes, and textures stay sharp and recognizable.
+- **Seamless subtle motion:** brings static images to life with gentle light sweeps, highlight shimmer, breathing glow, or CRT scanlines (`luminous`, `shimmer`, `sweep`, `breathe`, `scanline`, `drift`) without distorting the image.
+- **Full media support:** accepts `PNG`, `JPG`, `WEBP`, `BMP`, `TIFF`, animated `GIF`, and video files (`MP4`, `MOV`, `WEBM`, `MKV`, `AVI`).
+- **Share-ready exports:** outputs `PNG`, `GIF`, `MP4` (H.264), and plain-text `TXT` into `outputs/` while keeping your original file untouched.
+- **Built-in Showcase mode:** generate before-and-after transition GIFs (*Original → luminous scan → animated ASCII*) with `--showcase`, ready for READMEs and social posts.
+- **Fast glyph-atlas renderer:** vectorized with NumPy + Pillow with optional soft bloom (`--glow`).
 
 ---
 
-## Instalación
+## Installation
 
-Requiere **Python 3.10 o superior**.
+Requires **Python 3.10+**.
 
-### Opción 1: Instalar directamente desde GitHub con [`uv`](https://docs.astral.sh/uv/) *(recomendado)*
+### Option 1: Install from GitHub with [`uv`](https://docs.astral.sh/uv/) *(recommended)*
 
 ```bash
 uv tool install git+https://github.com/kingrxben/image-to-ascii-gif.git
 ```
 
-Esto deja disponibles globalmente los comandos `ascii-gif` e `image-to-ascii-gif`.
+This installs the `ascii-gif` and `image-to-ascii-gif` CLI commands globally.
 
-> También puedes probarlo sin instalar nada de forma permanente:
+> Or run it on the fly without installing permanently:
 > ```bash
-> uvx --from git+https://github.com/kingrxben/image-to-ascii-gif.git ascii-gif tu_imagen.jpg
+> uvx --from git+https://github.com/kingrxben/image-to-ascii-gif.git ascii-gif path/to/image.jpg
 > ```
 
-### Opción 2: Instalar con `pip`
+### Option 2: Install with `pip`
 
 ```bash
 pip install git+https://github.com/kingrxben/image-to-ascii-gif.git
 ```
 
-### Opción 3: Clonar y ejecutar localmente
+### Option 3: Clone and run locally
 
 ```bash
 git clone https://github.com/kingrxben/image-to-ascii-gif.git
@@ -65,106 +65,106 @@ cd image-to-ascii-gif
 uv sync
 ```
 
-Con el repositorio clonado, ejecútalo así:
+Then run it inside the project:
 
 ```bash
-uv run ascii-gif ruta/a/tu_imagen.jpg
+uv run ascii-gif path/to/image.jpg
 ```
 
 ---
 
-## Uso rápido
+## Quick Start
 
-Procesa cualquier imagen con los valores predeterminados (`--detail high`, `--palette detailed`, `--color-mode color`, `--effect luminous`):
+Convert any image using sensible defaults (`--detail high`, `--palette detailed`, `--color-mode color`, `--effect luminous`):
 
 ```bash
-ascii-gif ruta/a/tu_imagen.jpg
+ascii-gif path/to/image.jpg
 ```
 
-Tu archivo original permanece intacto y los resultados se guardan en `outputs/`:
+Your original file is never modified, and results are saved cleanly inside `outputs/`:
 
 ```text
 outputs/
-├── tu_imagen_ascii.png   # Fotograma clave en alta nitidez
-├── tu_imagen_ascii.gif   # Animación en bucle perfecto
-├── tu_imagen_ascii.mp4   # Video H.264 listo para redes
-└── tu_imagen_ascii.txt   # Versión en texto plano
+├── image_ascii.png   # Crisp keyframe PNG
+├── image_ascii.gif   # Seamless looping animated GIF
+├── image_ascii.mp4   # H.264 MP4 video
+└── image_ascii.txt   # Plain-text ASCII art
 ```
 
-### Generar un GIF Showcase (*Antes → Después*)
+### Generate a Before → After Showcase GIF
 
-Crea una animación como la portada de este README (imagen original → barrido de luz → arte ASCII animado en bucle):
+Create a transition GIF just like the hero demo above (original photo → luminous diagonal scan → living animated ASCII):
 
 ```bash
-ascii-gif ruta/a/tu_imagen.jpg --showcase-only --showcase-out assets/demo.gif
+ascii-gif path/to/image.jpg --showcase-only --showcase-out assets/demo.gif
 ```
 
-Si quieres exportar todos los formatos normales **y además** el GIF showcase:
+Or generate all standard outputs **plus** the showcase GIF:
 
 ```bash
-ascii-gif ruta/a/tu_imagen.jpg --showcase
+ascii-gif path/to/image.jpg --showcase
 ```
 
 ---
 
-## Recetas y ejemplos
+## Examples
 
 ```bash
-# Nombre personalizado para los archivos de salida
-ascii-gif retrato.png --name caballero
+# Custom base filename for outputs
+ascii-gif portrait.png --name knight
 
-# Estética terminal verde retro con barrido CRT
-ascii-gif foto.jpg --color-mode green --effect scanline --palette matrix
+# Retro green terminal aesthetic with CRT scanline
+ascii-gif photo.jpg --color-mode green --effect scanline --palette matrix
 
-# Estética ámbar vintage con destellos sutiles y movimiento lento
-ascii-gif foto.webp --color-mode amber --effect shimmer --speed 0.7 --intensity 0.5
+# Vintage amber with slow, subtle highlight shimmer
+ascii-gif photo.webp --color-mode amber --effect shimmer --speed 0.7 --intensity 0.5
 
-# Estilo tinta sobre papel con máximo detalle
-ascii-gif retrato.jpg --color-mode paper --detail ultra --effect breathe --intensity 0.4
+# High-detail dark ink on warm paper
+ascii-gif portrait.jpg --color-mode paper --detail ultra --effect breathe --intensity 0.4
 
-# Convertir un GIF animado o video a ASCII
+# Convert an animated GIF or video clip to ASCII
 ascii-gif clip.mp4 --width 110 --fps 12
 
-# Usar una paleta de caracteres personalizada (de oscuro a claro)
-ascii-gif foto.jpg --palette " .:-=+*#%@" --glow 0.3
+# Use a custom character ramp (dark to bright)
+ascii-gif photo.jpg --palette " .:-=+*#%@" --glow 0.3
 ```
 
 ---
 
-## Opciones disponibles
+## CLI Options
 
-| Opción | Predeterminado | Descripción |
+| Option | Default | Description |
 | --- | --- | --- |
-| `--name` | nombre del archivo | Nombre base para los archivos generados. |
-| `-o`, `--output-dir` | `outputs` | Carpeta donde se guardan los archivos resultantes. |
-| `--detail` | `high` | Nivel de detalle: `low`, `medium`, `high`, `ultra`. |
-| `-w`, `--width` | según `--detail` | Ancho exacto en caracteres ASCII (ej. `90`, `140`). |
-| `--palette` | `detailed` | Paleta: `detailed`, `classic`, `blocks`, `minimal`, `matrix` o cadena personalizada. |
-| `--color-mode` | `color` | Modo de color: `color`, `amber`, `green`, `cyan`, `mono`, `paper`. |
-| `--bg-color` | según modo | Color de fondo hexadecimal (ej. `#0a0c12`). |
-| `--effect` | `luminous` | Efecto: `luminous`, `shimmer`, `sweep`, `breathe`, `scanline`, `drift`, `none`. |
-| `--intensity` | `0.55` | Intensidad del efecto de luz/movimiento (`0.0` a `1.5`). |
-| `--speed` | `1.0` | Multiplicador de velocidad (`0.5` más lento, `1.5` más rápido). |
-| `--fps` / `--frames` | `12` / `24` | Fotogramas por segundo y cantidad de cuadros del bucle. |
-| `--font-size` / `--font` | según `--detail` | Tamaño de fuente en píxeles o ruta a una fuente monoespaciada (`.ttf`/`.ttc`/`.otf`). |
-| `--glow` | `0.22` | Resplandor sutil en fondos oscuros (`0.0` para desactivar). |
-| `--contrast` / `--saturation` | `1.12` / `1.18` | Ajuste previo de contraste y saturación. |
-| `--showcase` / `--showcase-only` | desactivado | Genera el GIF de transición *Original → ASCII animado*. |
-| `--showcase-out` / `--showcase-cmd` | automático | Ruta de salida y texto de comando del GIF showcase. |
-| `--no-png` / `--no-gif` / `--no-mp4` / `--no-txt` | todos activos | Permite omitir formatos específicos. |
+| `--name` | input stem | Base filename for generated outputs. |
+| `-o`, `--output-dir` | `outputs` | Directory where output files are saved. |
+| `--detail` | `high` | Detail preset: `low`, `medium`, `high`, `ultra`. |
+| `-w`, `--width` | from `--detail` | Exact width in ASCII characters (e.g. `90`, `140`). |
+| `--palette` | `detailed` | Preset (`detailed`, `classic`, `blocks`, `minimal`, `matrix`) or custom character string. |
+| `--color-mode` | `color` | Color mode: `color`, `amber`, `green`, `cyan`, `mono`, `paper`. |
+| `--bg-color` | from mode | Background color in hex (e.g. `#0a0c12`). |
+| `--effect` | `luminous` | Animation effect: `luminous`, `shimmer`, `sweep`, `breathe`, `scanline`, `drift`, `none`. |
+| `--intensity` | `0.55` | Effect intensity (`0.0` to `1.5`). |
+| `--speed` | `1.0` | Playback speed multiplier (`0.5` slower, `1.5` faster). |
+| `--fps` / `--frames` | `12` / `24` | Base frame rate and frame count for static-image loops. |
+| `--font-size` / `--font` | from `--detail` | Font size in pixels or path to a monospace font (`.ttf`/`.ttc`/`.otf`). |
+| `--glow` | `0.22` | Subtle bloom/glow strength on dark backgrounds (`0.0` to disable). |
+| `--contrast` / `--saturation` | `1.12` / `1.18` | Pre-mapping contrast and color saturation multipliers. |
+| `--showcase` / `--showcase-only` | off | Export the *Original → animated ASCII* transition GIF. |
+| `--showcase-out` / `--showcase-cmd` | auto | Custom output path and header command label for the showcase GIF. |
+| `--no-png` / `--no-gif` / `--no-mp4` / `--no-txt` | all enabled | Skip specific output formats. |
 
-### Referencia de efectos
+### Effects Reference
 
-- **`luminous`** *(predeterminado)*: barrido diagonal suave + destellos en zonas iluminadas + respiración ambiental.
-- **`shimmer`**: centelleo orgánico sobre reflejos, brillos y bordes detallados.
-- **`sweep`**: haz de luz limpio que recorre la composición en diagonal.
-- **`breathe`**: pulsación suave de luz y profundidad tonal.
-- **`scanline`**: banda luminosa horizontal estilo monitor CRT.
-- **`drift`**: ondulación luminosa muy sutil sobre texturas sin deformar el sujeto.
-- **`none`**: exportación estática sin animación.
+- **`luminous`** *(default)*: gentle diagonal light sweep + specular highlight shimmer + subtle ambient breathing.
+- **`shimmer`**: organic twinkle focused on highlights, reflections, and intricate edges.
+- **`sweep`**: clean diagonal beam of light gliding across the frame.
+- **`breathe`**: calm pulsing of brightness and tonal depth.
+- **`scanline`**: horizontal glowing CRT scanline band.
+- **`drift`**: subtle luminance ripple over textures without warping geometry.
+- **`none`**: static export with no animation.
 
 ---
 
-## Licencia
+## License
 
-Distribuido bajo la licencia **MIT**. Consulta el archivo [`LICENSE`](LICENSE) para más detalles.
+Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more information.
